@@ -17,7 +17,7 @@ $plugin['name'] = 'smd_admin_themes';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '0.40';
+$plugin['version'] = '0.50';
 $plugin['author'] = 'Stef Dawson';
 $plugin['author_uri'] = 'http://stefdawson.com/';
 $plugin['description'] = 'Admin-side theme manager and editor';
@@ -182,7 +182,10 @@ if (!defined('txpinterface'))
 // TOFIX:
 //  * rawurlencode/decode for files with spaces in them. Currently can't edit contents of file with spaces in it as they get encoded as %20. If encoded, with each save they get %2520 added and it gets longer and longer....
 
-if (@txpinterface == 'admin') {
+use \Textpattern\Admin\Theme;
+
+if (txpinterface === 'admin') {
+
 	// Silence warnings because, although the plugin requires smd_crunchers for the
 	// import/export features, it'll function in a reduced capacity without it
 	@require_plugin('smd_crunchers');
@@ -194,10 +197,10 @@ if (@txpinterface == 'admin') {
 	$smd_at_fullev = 'smd_admin_themes';
 	$smd_at_adm_event = 'smd_admat';
 	$smd_at_privs = '1';
-	$smd_at_feedurl = 'http://textgarden.org/admin-themes-feed';
-	$smd_at_theme_repo = 'http://textgarden.org/administration-themes';
+	$smd_at_feedurl = '';
+	$smd_at_theme_repo = '';
 
-	$smd_core_themes = array('classic', 'hive', 'remora');
+	$smd_core_themes = array('hive', 'hiveneutral');
 
 	add_privs($smd_at_event, $smd_at_privs);
 	add_privs('plugin_prefs.'.$smd_at_fullev, $smd_at_privs);
@@ -315,7 +318,7 @@ function smd_at_list($message='') {
 	$pageby = (gps('qty')) ? gps('qty') : ((cs('smd_at_pageby')) ? cs('smd_at_pageby') : 15);
 	$max_theme_size = $at_prefs['smd_at_max_theme_size'];
 
-	$curr_skin = (smd_at_exists($theme->name)) ? $theme->name : 'classic';
+	$curr_skin = (smd_at_exists($theme->name)) ? $theme->name : 'hive';
 	$skin_list = smd_at_read_skins();
 	$crushers = smd_at_crush_options('compress');
 	$uncrushers = smd_at_crush_options('decompress');
@@ -905,20 +908,20 @@ function smd_at_clone() {
 
 		if ($skin) {
 			// Based on an existing theme. No need for any functions other than manifest()
-			$based = "theme::based_on('".$skin."');";
+			$based = "Theme::based_on('".$skin."');";
 			$extends = $skin.'_theme';
 			$srcss = THEME.$skin.DS.'textpattern.css';
 			if (file_exists($srcss) && filesize($srcss) > 0) {
 				$import = join('', file($srcss));
 			} else {
-				$import = '@import url("../classic/textpattern.css");';
+				$import = '@import url("../hive/assets/css/textpattern.css");';
 			}
 			$content = '{';
 		} else {
-			// Brand spanking new theme. Clone 'classic' functions then add new manifest()
-			$extends = 'theme';
+			// Brand spanking new theme. Clone 'hive' functions then add new manifest()
+			$extends = 'Theme';
 			$import = '';
-			$src = txpath.DS.THEME.'classic'.DS.'classic.php';
+			$src = txpath.DS.THEME.'hive'.DS.'hive.php';
 			$grab = false;
 			$fp = file($src);
 
@@ -931,19 +934,21 @@ function smd_at_clone() {
 				if ($grab) {
 					$content .= $line.n;
 				}
-				if (strpos($line, 'class classic_theme extends theme') !== false) {
+				if (strpos($line, 'class hive_theme extends') !== false) {
 					$grab = true;
 				}
 			}
 		}
 
 		// manifest fields
-		$manuser = get_author_name($txp_user);
-		$mantitle = ucwords($new_skin);
+		$manuser = doSlash(get_author_name($txp_user));
+		$mantitle = doSlash(ucwords($new_skin));
 
 		// Write the new PHP file
 		$buf = <<<EOF
 <?php
+
+use \Textpattern\Admin\Theme;
 
 if (!defined('txpinterface')) die('txpinterface is undefined.');
 
@@ -1236,7 +1241,7 @@ function smd_at_delete() {
 
 			// Reset the global skin in case it's been deleted
 			$gbl_skin = $at_prefs['smd_at_global_skin'];
-			$gbl_skin = ($gbl_skin != '' && file_exists(txpath.DS.THEME.$gbl_skin)) ? $gbl_skin : 'classic';
+			$gbl_skin = ($gbl_skin != '' && file_exists(txpath.DS.THEME.$gbl_skin)) ? $gbl_skin : 'hive';
 			set_pref('smd_at_global_skin', $gbl_skin, $smd_at_event, PREF_HIDDEN, 'text_input');
 			set_pref('theme_name', $gbl_skin);
 
@@ -1842,7 +1847,7 @@ function smd_at_get_privs($user='') {
 
 // ------------------------
 function smd_at_exists($name) {
-	$instance = theme::factory($name);
+	$instance = Theme::factory($name);
 	return $instance;
 }
 
@@ -1856,7 +1861,7 @@ function smd_at_per() {
 	$skinSys = $at_prefs['smd_at_system'];
 	$privs = smd_at_get_privs();
 	$gbl_skin = ($at_prefs['smd_at_global_skin'] != '') ? $at_prefs['smd_at_global_skin'] : '';
-	$gbl_skin = (smd_at_exists($gbl_skin)) ? $gbl_skin : 'classic';
+	$gbl_skin = (smd_at_exists($gbl_skin)) ? $gbl_skin : 'hive';
 
 	switch ($skinSys) {
 		case 0:
@@ -1866,7 +1871,7 @@ function smd_at_per() {
 			} else {
 				// Admins
 				$adm_skin = get_pref('smd_skin', (($gbl_skin) ? $gbl_skin : $theme->name));
-				return (smd_at_exists($adm_skin)) ? $adm_skin : 'classic';
+				return (smd_at_exists($adm_skin)) ? $adm_skin : 'hive';
 			}
 			break;
 		case 1:
@@ -1882,14 +1887,14 @@ function smd_at_per() {
 					$privgrp = explode(":", $grpdef);
 					$skinid = array_shift($privgrp);
 					if (in_array($privs, $privgrp)) {
-						return (smd_at_exists($skinid)) ? $skinid : 'classic';;
+						return (smd_at_exists($skinid)) ? $skinid : 'hive';;
 					}
 				}
 				return ($gbl_skin) ? $gbl_skin : $theme->name;
 			} else {
 				// Admins
 				$adm_skin = get_pref('smd_skin', (($gbl_skin) ? $gbl_skin : $theme->name));
-				return (smd_at_exists($adm_skin)) ? $adm_skin : 'classic';
+				return (smd_at_exists($adm_skin)) ? $adm_skin : 'hive';
 			}
 			break;
 		case 2:
@@ -1902,7 +1907,7 @@ function smd_at_per() {
 			} else {
 				// Admins
 				$adm_skin = get_pref('smd_skin', (($gbl_skin) ? $gbl_skin : $theme->name));
-				return (smd_at_exists($adm_skin)) ? $adm_skin : 'classic';
+				return (smd_at_exists($adm_skin)) ? $adm_skin : 'hive';
 			}
 			break;
 	}
@@ -1913,7 +1918,7 @@ function smd_at_per() {
 function smd_at_read_skinfo($skin) {
 	global $smd_core_themes;
 
-	$this_theme = theme::factory($skin);
+	$this_theme = Theme::factory($skin);
 	$skinfo = array();
 	if ($this_theme) {
 		$skinfo = $this_theme->manifest();
@@ -1923,7 +1928,7 @@ function smd_at_read_skinfo($skin) {
 		$skinfo['phpfile'] = $this_theme->path($skin);
 		$skinfo['based_on'] = '';
 		$contents = file_get_contents($skinfo['phpfile']);
-		if (($pos = strpos($contents, 'theme::based_on')) !== false) {
+		if (($pos = strpos($contents, 'Theme::based_on')) !== false) {
 			$begpos = strpos($contents, "'", $pos)+1;
 			$endpos = strpos($contents, "'", $begpos);
 			$base = substr($contents, $begpos, $endpos-$begpos);
@@ -1958,7 +1963,7 @@ function smd_at_get_thumb($skin, $img=0) {
 
 // ------------------------
 function smd_at_read_skins() {
-	$skin_list = theme::names();
+	$skin_list = Theme::names();
 	$skin_list = smd_at_sort($skin_list);
 	return $skin_list;
 }
@@ -2215,7 +2220,7 @@ To uninstall, simply delete the plugin from the _Admin->Plugins_ page. The prefe
 
 h2(#usage). Usage
 
-On the __Extensions->Admin themes__ tab is a list or grid containing installed themes. Out of the box, there will be three available: __classic__, __hive__ and __remora__. *It's advisable not to change these themes* so you can always go back to them if everything goes sideways. Plus it's a very useful starting point from which to "base":#clone a "new theme":#new.
+On the __Extensions->Admin themes__ tab is a list or grid containing installed themes. Out of the box, there will be two available: __hive__ and __hiveneutral__. *It's advisable not to change these themes* so you can always go back to them if everything goes sideways. Plus it's a very useful starting point from which to "base":#clone a "new theme":#new.
 
 In the list layout, the columns are:
 
