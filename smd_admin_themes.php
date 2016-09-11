@@ -227,6 +227,8 @@ function smd_at_get_style_rules()
     $smd_at_styles = array(
         'smd_at' =>'
 .smd_at_btn { float: right }
+.smd-at-list-name { display:block; padding:.38461538461538em 2.5em .38461538461538em 1em; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; }
+.switcher-action + .smd-at-list-name { padding-right:1em; padding-left:2.5em; }
 .smd_at_update { font-weight:bold; color:#900; }
 #smd_at_images { margin:0px 6px -4px 0; }
 .smd_skin_filetypes { margin:12px 0; }
@@ -665,6 +667,7 @@ function smd_at_edit($message = '')
 
     // Split the list into its directory groups
     $allfiles = array();
+
     foreach ($files as $currfile) {
         $file_info = pathinfo($currfile);
         // Ignore any rogue Subversion files
@@ -673,11 +676,13 @@ function smd_at_edit($message = '')
             $allfiles[$file_type][] = $currfile;
         }
     }
+
     if (gps('smd_at_edits')) {
         $contents = str_replace('\r\n','
 ',gps('smd_at_edits')); // newline workaround
     } else {
         $contents = '';
+
         if ($file && file_exists(THEME.$skin.DS.$dir.DS.$file)) {
             $contents = file(THEME.$skin.DS.$dir.DS.$file);
             $contents = join("", $contents);
@@ -697,9 +702,11 @@ function smd_at_edit($message = '')
 
     // selectInput needs both index and value to be the same in this case
     $skinsel = array();
-    foreach($skin_list as $key1 => $value1) {
+
+    foreach ($skin_list as $key1 => $value1) {
         $skinsel[$value1] = $skin_list[$key1];
-   }
+    }
+
     $skinChange = '<form name="skinchange" action="index.php">'
         . eInput($smd_at_event)
         . sInput('smd_at_edit')
@@ -707,23 +714,22 @@ function smd_at_edit($message = '')
         . selectInput('skin', $skinsel, $skin, 0, 1)
         . '</form>';
 
+    $listActions = graf(
+        href('<span class="ui-icon ui-icon-arrowthickstop-1-s"></span> '.gTxt('expand_all'), '#', array(
+            'class'         => 'txp-expand-all',
+            'aria-controls' => 'allforms_form',
+        )).
+        href('<span class="ui-icon ui-icon-arrowthickstop-1-n"></span> '.gTxt('collapse_all'), '#', array(
+            'class'         => 'txp-collapse-all',
+            'aria-controls' => 'allforms_form',
+        )), array('class' => 'txp-actions')
+    );
+
     $fileList = array();
-    $fileList[] = '<div id="content_switcher">'
-        .n. hed(gTxt('smd_at_skin_files'),2)
+    $fileList[] = '<div id="content_switcher" class="txp-layout-4col-alt" role="region">'
+        .n. hed(gTxt('smd_at_skin_files'), 2)
         .n. $skinChange
-        .n. '<p class="txp-buttons">'
-        .n. '<a class="navlink" href="?event='.$smd_at_event.a.'step=smd_at_newfile'.a.'skin='.$skin.'">'.gTxt('smd_at_new_file').'</a>'
-        .n. '<a class="navlink" href="?event='.$smd_at_event.'">'.gTxt('smd_at_all_themes').'</a>'
-        .n. '</p>'
-        .n. '<form action="index.php" method="post" enctype="multipart/form-data">'
-        .n. hInput('MAX_FILE_SIZE', $file_max_upload_size)
-        .n. hInput('id', $skin)
-        .n. eInput($smd_at_event)
-        .n. sInput('smd_at_upload')
-        .n. tInput()
-        .n. '<input type="file" name="smd_at_file[]" multiple="true" />'.sp.fInput('submit', '', gTxt('upload'))
-        .n. graf('<label for="smd_at_folder">'.gTxt('smd_at_folder').'</label>' .n. fInput('text', 'smd_at_folder', ps('smd_at_folder'), '', '', '', INPUT_MEDIUM, '', 'smd_at_folder'))
-        .n. '</form>'
+        .$listActions
 //      .n. upload_form(gTxt('upload_file'), '', 'smd_at_upload', $smd_at_event, $skin, $file_max_upload_size, '', '')
         .n. '<form id="smd_at_allfiles" action="index.php" method="post">';
 
@@ -743,26 +749,23 @@ function smd_at_edit($message = '')
             $is_img = smd_at_is_image($currfile);
             $is_bin = smd_at_is_binary($currfile);
 
-            $edit = $is_img ? '<a href="'.$currfile.'" title="'.gTxt('smd_at_preview_image').'">'.$showfile.'</a>' : ($is_bin ? $showfile : '<a href="?event='.$smd_at_event.a.'step=smd_at_edit'.a.'skin='.$skin.a.'file='.$justfile.a.'dir='.$justdir.'">'.$showfile.'</a>');
+            $edit = $is_img ? '<a href="'.$currfile.'" title="'.gTxt('smd_at_preview_image').'">'.$showfile.'</a>' : ($is_bin ? '<span class="smd-at-list-name">' . $showfile . '</span>' : '<a href="?event='.$smd_at_event.a.'step=smd_at_edit'.a.'skin='.$skin.a.'file='.$justfile.a.'dir='.$justdir.'">'.$showfile.'</a>');
             $modbox = ($basefile == $skin)
                 ?   ''
                 :   '<input type="checkbox" name="selected_files[]" value="'.$justdir.DS.$justfile.'" />';
 
             $group_name = in_array($ftype, $imagable) ? 'image_files' : (in_array($ftype, $editable) ? $ftype : 'other');
 
-            $out[$group_name][] = '<li>'.n.'<span class="smd-at-list-action">'.$modbox.'</span><span class="smd-at-list-name">'.$edit.'</span></li>';
+            $out[$group_name][] = '<li>'.n.'<span class="switcher-action">'.$modbox.'</span>'.$edit.'</li>';
         }
     }
 
     $combined = array_merge($editable, array('image_files', 'other'));
-    foreach($combined as $group_name) {
+
+    foreach ($combined as $group_name) {
         if (isset($out[$group_name])) {
-            $visipref = 'smd_at_pane_'.$group_name.'_visible';
-            $fileList[] = '<div class="summary-details '.$group_name.'"><h3 class="lever'.(get_pref($visipref) ? ' expanded' : '').'"><a href="#'.$group_name.'">'.gTxt('smd_at_'.$group_name).'</a></h3>'.n.
-                '<div id="'.$group_name.'" class="toggle skin-list" style="display:'.(get_pref($visipref) ? 'block' : 'none').'">'.n.
-                '<ul class="plain-list">'.n;
-            $fileList[] = join(n, $out[$group_name]);
-            $fileList[] = '</ul></div></div>';
+            $content = '<ul class="switcher-list">' .n. join(n, $out[$group_name]) .n. '</ul>';
+            $fileList[] = wrapRegion($group_name.'_group', $content, $group_name, 'smd_at_'.$group_name, 'smd_at_pane_'.$group_name.'_visible');
         }
     }
 
@@ -771,68 +774,101 @@ function smd_at_edit($message = '')
 
     $dirs = array_unique($dirs);
     unset($dirs[array_search(THEME.$skin, $dirs)]);
+
     foreach ($dirs as $thisdir) {
-        $dirout[] = '<tr><td class="smd-at-list-name">'.str_replace(THEME.$skin.'/', '', $thisdir).'</td><td>'.dLink($smd_at_event, 'smd_at_delete_folder', 'delfolder', $thisdir, 1, 'skin', $skin).'</td></tr>';
+        $dirout[] = '<li class="smd-at-list-name">'.str_replace(THEME.$skin.'/', '', $thisdir).'</td><td>'.dLink($smd_at_event, 'smd_at_delete_folder', 'delfolder', $thisdir, 1, 'skin', $skin).'</li>';
     }
 
-    $folderList = ($dirout) ? '<div class="summary-details folders"><h3 class="lever'.(get_pref('smd_at_pane_folders_visible') ? ' expanded' : '').'"><a href="#folders">'.gTxt('smd_at_folders').'</a></h3>'.n.
-        '<div id="folders" class="toggle skin-list" style="display:'.(get_pref('smd_at_pane_folders_visible') ? 'block' : 'none').'">'.n.
-        '<table>'.
-        join(n, $dirout) . '</table></div></div>' : '';
+    $folderList = ($dirout)
+        ? wrapRegion('smd_at_folders_group', '<ul class="switcher-list">' .n. join(n, $dirout) .n. '</ul>', 'folders', 'smd_at_folders', 'smd_at_pane_folders_visible')
+        : '';
 
     $qs = array(
         "event" => $smd_at_event,
     );
+
     $qsVars = "index.php".join_qs($qs);
 
-    // Render the rest of the page
-    echo startTable('', '', 'txp-columntable'),
-    tr(
-        td(
-            hed(gTxt('smd_at_edit_lbl', array('{theme}' => (($skinfo) ? $skinfo['dname'] : $skin))), 1).
-            form(
-                n.graf(
-                    '<label for="new_skin">' . gTxt('smd_at_file_name') . '</label>'
-                    .n.'<input type="text" id="new_skin" name="new_skin" value="'.txpspecialchars($file).'" size="'.INPUT_REGULAR.'" />'
-                    .n.($is_textile ? '<a class="smd_at_preview" href="?event=' . $smd_at_event .a. 'step=smd_at_preview' .a. 'skin='.$skin.a.'dir='.$dir.a.'file='.$file.a.'type=textile'.a.'_txp_token='.form_token().'">'.gTxt('preview').'</a>' : '')
-                    .n.($is_svg ? '<a class="smd_at_preview" href="'. THEME . $skin.'/' . (($dir) ? $dir.'/' : '') . $file .'">'.gTxt('preview').'</a>' : '')
-                )
-                .($step == 'smd_at_newfile'
-                    ? n.graf(
-                        '<label for="new_skin_dir">' . gTxt('smd_at_folder_name') . '</label>'
-                        .n.'<input type="text" id="new_skin_dir" name="new_skin_dir" value="'.txpspecialchars($dir).'" size="'.INPUT_REGULAR.'" />'
-                    )
-                    : ''
-                )
-                .n.graf(
-                    '<textarea id="smd_at_edits" class="code" name="smd_at_edits" cols="'.INPUT_XLARGE.'" rows="'.INPUT_REGULAR.'">'.txpspecialchars($contents).'</textarea>'
-                    )
-                .n.graf(
-                    fInput('submit','',gTxt('save'),'publish')
-                )
-                .n.eInput($smd_at_event)
-                .n.sInput('smd_at_save')
-                .n.hInput('skin',$skin)
-                .n.hInput('file',$file)
-                .n.hInput('dir',$dir)
+    // Render the rest of the page.
+    echo '<div class="txp-layout">'
+        .'<div class="txp-layout-2col">'
+        .hed(gTxt('smd_at_edit_lbl', array('{theme}' => (($skinfo) ? $skinfo['dname'] : $skin))), 1)
+        .'</div>'
+        .n. '<div class="txp-layout-2col">'
+        .graf(
+            href(gTxt('smd_at_all_themes'), '?event=' . $smd_at_event, array('class' => 'smd_at_btn'))
+            , array('class' => 'txp-actions txp-actions-inline')
+        )
+        .n. '</div>'
+
+        .n. '<div class="txp-layout-1col">'
+        .n. '<div class="txp-control-panel">'
+        .n. '<form action="index.php" method="post" enctype="multipart/form-data">'
+        .n. hInput('MAX_FILE_SIZE', $file_max_upload_size)
+        .n. hInput('id', $skin)
+        .n. eInput($smd_at_event)
+        .n. sInput('smd_at_upload')
+        .n. tInput()
+        .n. '<input type="file" name="smd_at_file[]" multiple="true" />'.sp.fInput('submit', '', gTxt('upload'))
+        .n. graf('<label for="smd_at_folder">'.gTxt('smd_at_folder').'</label>' .n. fInput('text', 'smd_at_folder', ps('smd_at_folder'), '', '', '', INPUT_MEDIUM, '', 'smd_at_folder'))
+        .n. '</form>'
+        .n. '</div>'
+        .n. '</div>'
+
+        .join(n, $fileList).n.$folderList.'</div>'
+        .'<div class="txp-layout-4col-3span" role="region">'
+        .form(
+            n. '<p class="txp-actions txp-actions-inline">'
+            .n. '<a href="?event='.$smd_at_event.a.'step=smd_at_newfile'.a.'skin='.$skin.'"><span class="ui-icon ui-extra-icon-new-document"></span> '.gTxt('smd_at_new_file').'</a>'
+            .n. '</p>'
+            .n.'<div class="txp-form-field">'
+            .n.'<div class="txp-form-field-label">'
+            .n.'<label for="new_skin">' . gTxt('smd_at_file_name') . '</label>'
+            .n.'</div>'
+            .n.'<div class="txp-form-field-value">'
+            .n.'<input type="text" id="new_skin" name="new_skin" value="'.txpspecialchars($file).'" size="'.INPUT_REGULAR.'" />'
+            .n.($is_textile ? '<a class="smd_at_preview" href="?event=' . $smd_at_event .a. 'step=smd_at_preview' .a. 'skin='.$skin.a.'dir='.$dir.a.'file='.$file.a.'type=textile'.a.'_txp_token='.form_token().'">'.gTxt('preview').'</a>' : '')
+            .n.($is_svg ? '<a class="smd_at_preview" href="'. THEME . $skin.'/' . (($dir) ? $dir.'/' : '') . $file .'">'.gTxt('preview').'</a>' : '')
+            .n.'</div>'
+            .n.'</div>'
+            .($step == 'smd_at_newfile'
+                ? n.'<div class="txp-form-field">'
+                    .n.'<div class="txp-form-field-label">'
+                    .n.'<label for="new_skin_dir">' . gTxt('smd_at_folder_name') . '</label>'
+                    .n.'</div>'
+                    .n.'<div class="txp-form-field-value">'
+                    .n.'<input type="text" id="new_skin_dir" name="new_skin_dir" value="'.txpspecialchars($dir).'" size="'.INPUT_REGULAR.'" />'
+                    .n.'</div>'
+                    .n.'</div>'
+                : ''
             )
-        , '', 'column').
-        n.tdtl(join(n, $fileList).n.$folderList.n.'</div>', ' class="column"')
-    ),
-    endTable().
-    script_js( <<<EOS
-        jQuery(document).ready(function() {
-            jQuery('#smd_at_allfiles').txpMultiEditForm({
-                'checkbox' : 'input[name="selected_files[]"][type=checkbox]',
-                'row' : '.plain-list li, .smd-at-list-name',
-                'highlighted' : '.plain-list li'
-            });
-        });
-        jQuery('#smd_at_edits').keyup(function() {
-            jQuery('.smd_at_preview').hide();
-        });
+            .n.graf(
+                '<textarea id="smd_at_edits" class="code" name="smd_at_edits" cols="'.INPUT_XLARGE.'" rows="'.INPUT_REGULAR.'">'.txpspecialchars($contents).'</textarea>'
+                )
+            .n.graf(
+                fInput('submit','',gTxt('save'),'publish')
+            )
+            .n.eInput($smd_at_event)
+            .n.sInput('smd_at_save')
+            .n.hInput('skin',$skin)
+            .n.hInput('file',$file)
+            .n.hInput('dir',$dir)
+        )
+        .'</div>'
+        .script_js( <<<EOS
+jQuery(document).ready(function() {
+    jQuery('#smd_at_allfiles').txpMultiEditForm({
+        'checkbox' : 'input[name="selected_files[]"][type=checkbox]',
+        'row' : '.switcher-list li',
+        'highlighted' : '.switcher-list li'
+    });
+});
+jQuery('#smd_at_edits').keyup(function() {
+    jQuery('.smd_at_preview').hide();
+});
 EOS
-    );
+        )
+        .'</div></div>';
 }
 
 // ------------------------
