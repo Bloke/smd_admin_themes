@@ -424,7 +424,7 @@ EOJS
             .n. gTxt('smd_at_help_link', array('{link}' => $helpLink))
         .n. '<a href="#" onclick="return smd_getval(\'new\', \'smd_at_clone\');"><span class="ui-icon ui-extra-icon-new-document"></span> '.gTxt('smd_at_new').'</a>'
         .n. '<p id="pop_new" class="smd_popup txp-list-options" hidden>'
-        .n. '<span>'. gTxt('smd_at_new_skin'). '</span>'.n. '<input type="text" name="smd_text_name" value="" size="'. INPUT_REGULAR. '" /> <a href="#">['. gTxt('smd_at_confirm'). ']</a>'
+        .n. '<span>'. gTxt('smd_at_new_skin'). '</span>'.n. '<input type="text" name="smd_text_name" value="" size="'. INPUT_REGULAR. '" /> <a class="navlink" href="#">'. gTxt('smd_at_confirm'). '</a>'
         .n. '</p>'
             , array('class' => 'txp-actions txp-actions-inline')
         )
