@@ -111,12 +111,11 @@ smd_at_new => Create new theme
 smd_at_new_cloneskin => Name of copy
 smd_at_new_file => New file
 smd_at_new_skin => Theme name
-smd_at_one_theme => One theme
 smd_at_other => Other files
 smd_at_other_files => Others
-smd_at_per_group => per priv level
-smd_at_per_site => for all
-smd_at_per_user => per user
+smd_at_per_group => Theme per priv level
+smd_at_per_site => One theme for all
+smd_at_per_user => Theme per user
 smd_at_php => PHP
 smd_at_prefs_deleted => Preferences deleted
 smd_at_prefs_installed => Preferences installed
@@ -225,6 +224,7 @@ function smd_at_get_style_rules()
 {
     $smd_at_styles = array(
         'smd_at' =>'
+.smd_at_btn { float: right }
 .smd_at_update { font-weight:bold; color:#900; }
 #smd_at_images { margin:0px 6px -4px 0; }
 .smd_skin_filetypes { margin:12px 0; }
@@ -1599,7 +1599,10 @@ function smd_at_setup($message = '')
     $clrBtn = ' [<span id="smd_clr" class="smd_fakebtn">'.gTxt('smd_at_clear').'</span>]';
     $btnSet = fInput('submit', 'submit', gTxt('smd_at_set'), 'publish');
     $btnSave = graf(fInput('submit', 'submit', gTxt('save'), 'publish'));
-    $btnList = '<p class="txp-buttons"><a class="navlink" href="?event='.$smd_at_event.'">'.gTxt('smd_at_all_themes').'</a></p>';
+    $btnList = graf(
+        href(gTxt('smd_at_all_themes'), '?event=' . $smd_at_event, array('class' => 'smd_at_btn'))
+        , array('class' => 'txp-actions txp-actions-inline')
+    );
     $radBtns = array(
         gTxt('smd_at_per_site'),
         gTxt('smd_at_per_group'),
@@ -1620,57 +1623,69 @@ function smd_at_setup($message = '')
     $gbl_skin = ($at_prefs['smd_at_global_skin'] != '') ? $at_prefs['smd_at_global_skin'] : $theme->name;
     $crushers = smd_at_crush_options('compress');
 
-    echo n, '<div class="plugin-column">',
-        n, '<h2>', strong(gTxt('smd_at_prefs_title')), '</h2>',
-        n, $btnList,
-        n, '<form method="post" action="?event=', $smd_at_event, a, 'step=smd_at_prefs_update" onsubmit="return smd_presub();">',
-        n, inputLabel('smd_at_case_sort', yesnoRadio('smd_at_case_sort', $at_prefs['smd_at_case_sort']), 'smd_at_case_sort');
+    echo n. '<div class="txp-layout">'
+            .n. '<div class="txp-layout-2col">'
+            .n. '<h1 class="txp-heading">'.gTxt('smd_at_prefs_title').'</h1>'
+            .n. '</div>'
+            .n. '<div id="smd_at_control" class="txp-layout-2col">'
+            .n. $btnList
+            .n. '</div>'
+        .n. '<div class="txp-layout-1col">'
+        .n. '<form method="post" class="txp-edit" action="?event=', $smd_at_event, a, 'step=smd_at_prefs_update" onsubmit="return smd_presub();">'
+        .n. inputLabel('smd_at_case_sort', yesnoRadio('smd_at_case_sort', $at_prefs['smd_at_case_sort']), 'smd_at_case_sort');
 
     if ($crushers) {
-        echo n, inputLabel('smd_at_crush', radioSet($crushers, 'smd_at_crush', $at_prefs['smd_at_crush']), 'smd_at_crush_type');
+        echo n. inputLabel('smd_at_crush', radioSet($crushers, 'smd_at_crush', $at_prefs['smd_at_crush']), 'smd_at_crush_type');
     }
 
-    echo n, inputLabel('smd_at_layout', radioSet(array(gTxt('smd_at_layout_list'), gTxt('smd_at_layout_grid')), 'smd_at_layout', $at_prefs['smd_at_layout']), 'smd_at_layout'),
-        n, inputLabel('smd_at_thumbsize', fInput('text', 'smd_at_tw', $at_prefs['smd_at_tw'],'input-xsmall','','',4).n.gTxt('smd_at_times').n.fInput('text', 'smd_at_th', $at_prefs['smd_at_th'],'input-xsmall','','',4), 'smd_at_thumbsize'),
-        n, inputLabel('smd_at_filename_format', fInput('text', 'smd_at_filename_format', $at_prefs['smd_at_filename_format']), 'smd_at_filename_format'),
-        n, inputLabel('smd_at_max_theme_size', fInput('text', 'smd_at_max_theme_size', $at_prefs['smd_at_max_theme_size']), 'smd_at_max_theme_size'),
-        n, inputLabel('smd_at_global_skin', selectInput('smd_at_global_skin', $skinsel, $gbl_skin, 0, 0, 'smd_at_global_skin'), 'smd_at_global_skin'),
-        n, inputLabel('smd_at_skin_system', gTxt('smd_at_one_theme').n.radioSet($radBtns, 'smd_at_system', $at_prefs['smd_at_system']), 'smd_at_skin_system');
+    echo n. inputLabel('smd_at_layout', radioSet(array(gTxt('smd_at_layout_list'), gTxt('smd_at_layout_grid')), 'smd_at_layout', $at_prefs['smd_at_layout']), 'smd_at_layout')
+        .n. inputLabel('smd_at_thumbsize', fInput('text', 'smd_at_tw', $at_prefs['smd_at_tw'],'input-xsmall','','',4).n.gTxt('smd_at_times').n.fInput('text', 'smd_at_th', $at_prefs['smd_at_th'],'input-xsmall','','',4), 'smd_at_thumbsize')
+        .n. inputLabel('smd_at_filename_format', fInput('text', 'smd_at_filename_format', $at_prefs['smd_at_filename_format']), 'smd_at_filename_format')
+        .n. inputLabel('smd_at_max_theme_size', fInput('text', 'smd_at_max_theme_size', $at_prefs['smd_at_max_theme_size']), 'smd_at_max_theme_size')
+        .n. inputLabel('smd_at_global_skin', selectInput('smd_at_global_skin', $skinsel, $gbl_skin, 0, 0, 'smd_at_global_skin'), 'smd_at_global_skin')
+        .n. inputLabel('smd_at_skin_system', radioSet($radBtns, 'smd_at_system', $at_prefs['smd_at_system']), 'smd_at_skin_system');
 
     // Option 1
     $priv_list = '<select id="smd_at_privs" name="smd_at_privs[]" class="list" size="'.$numLevs.'" multiple="multiple">';
+
     foreach ($levels as $levid => $levname) {
         $priv_list .= '<option value="'.$levid.'">'.$levname.'</option>';
     }
+
     $priv_list .= '</select>';
 
     // Note the hidden skin group box; jQuery keeps track of any list changes and keeps it updated
-    $sela = '<span class="edit-label"><label>'. gTxt('smd_at_skin_groups').'</label></span>';
+    $sela = '<div class="txp-form-field-label"><label>' . gTxt('smd_at_skin_groups') . '</label></div>';
     $selb = hInput('smd_at_group_list', $at_prefs['smd_at_group_list']);
     $selb .= '<select id="smd_at_grps" name="smd_at_grps" class="list" size="'.$numLevs.'">';
+
     foreach ($skin_list as $askin) {
         if (smd_at_exists($askin)) {
             $selb .= '<option value="'.$askin.'">'.$askin.'</option>';
         }
     }
+
     $selb .= '</select>';
-    echo n, graf($sela.'<span class="edit-value">'.$selb.$priv_list.'</span>', ' class="smd_at_sel1"');
+
+    echo n. '<div class="txp-form-field smd_at_sel1">' .$sela.'<div class="txp-form-field-value">'.$selb.$priv_list.'</div></div>';
 
     // Option 2
-    $sela = gTxt('smd_at_allowed_skins');
+    $sela = '<div class="txp-form-field-label"><label>' . gTxt('smd_at_allowed_skins') . '</label></div>';
     $selb = '<select id="smd_at_user_list" name="smd_at_user_list[]" class="list" size="8" multiple="multiple">';
+
     foreach ($skin_list as $askin) {
         if (smd_at_exists($askin)) {
             $selb .= '<option value="'.$askin.'"'.((in_array($askin, $uskins)) ? ' selected="selected"' : '').'>'.$askin.'</option>';
         }
     }
+
     $selb .= '</select>'.$clrBtn;
 
-    echo graf($sela.'<span class="edit-value">'.$selb.'</span>', ' class="smd_at_sel2"'),
-        n, $btnSave,
-        n, tInput(),
-        n, '</form>',
-        n, '</div>';
+    echo n. '<div class="txp-form-field smd_at_sel2">' .$sela.'<div class="txp-form-field-value">'.$selb.'</div></div>'
+        .n. $btnSave
+        .n. tInput()
+        .n. '</form>'
+        .n. '</div></div>';
 
     echo script_js(<<<EOJS
 // Handle show/hide of pref widgets based on radio selection
