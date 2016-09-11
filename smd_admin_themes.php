@@ -102,7 +102,6 @@ smd_at_js => Javascript
 smd_at_layout => Layout method
 smd_at_layout_grid => Grid
 smd_at_layout_list => List
-smd_at_list_title => Installed themes
 smd_at_manage_lbl => Theme manager
 smd_at_max_theme_size => Max theme file size (bytes)
 smd_at_mkdir_failed => Cannot create directory for file {name}. Try manually creating it.
@@ -173,6 +172,9 @@ if (!defined('txpinterface'))
  *
  * @author Stef Dawson
  * @link   http://stefdawson.com/
+ * @todo : Remove these strings
+ *  -> smd_at_list_title
+ *  -> smd_at_one_theme
  */
 
 // TODO:
@@ -339,13 +341,16 @@ function smd_at_list($message = '')
             }
         }
     }
+
     $bases = array_unique($bases);
 
-    pagetop(gTxt('smd_at_manage_lbl'),$message);
+    pagetop(gTxt('smd_at_manage_lbl'), $message);
 
-    // Handle paging
+    // Handle paging.
+    // @todo Why does plugin not have its own pageby?
     $total = count($skin_list);
     $limit = max(@$pageby, 15);
+
     list($page, $offset, $numPages) = pager($total, $limit, $page);
     $skin_list = array_slice($skin_list, $offset, $limit);
 
@@ -406,31 +411,37 @@ function smd_getval(skin, step) {
 EOJS
     );
 
-    // List the available skins
-    echo '<h1 class="txp-heading">', gTxt('smd_at_tab_name'), '</h1>',
-        n, '<div id="smd_control" class="txp-control-panel">',
-        n, (($uncrushers) ? upload_form(gTxt('smd_at_install_skin'), '', 'smd_at_import', $smd_at_event, '', $max_theme_size).n.'<p><small>'.gTxt('smd_at_supported_import', array('{types}' => (($uncrushers) ? join(', ', $uncrushers) : gTxt('none')) )).'</small></p>' : '').
-        n, '<p class="txp-buttons">',
-            n, '<a href="?event=', $smd_at_event, a, 'step=smd_at_setup">', gTxt('smd_at_setup'), '</a>',
-            n, gTxt('smd_at_help_link', array('{link}' => $helpLink)),
-            n, '<a href="'.$smd_at_theme_repo.'">', gTxt('smd_at_find_theme'), '</a>',
-            n, '<a href="#" onclick="return smd_getval(\'new\', \'smd_at_clone\');">'.gTxt('smd_at_new').'</a>',
-        n, '</p>',
-        n, '<p id="pop_new" class="smd_popup empty">',
-            n, '<span>', gTxt('smd_at_new_skin'), '</span>', n, '<input type="text" name="smd_text_name" value="" size="', INPUT_REGULAR, '" /> <a href="#">[', gTxt('smd_at_confirm'), ']</a>',
-        n, '</p>',
-        n, '</div>';
+    // List the available skins.
+    echo '<div class="txp-layout">'
+        .n. '<div class="txp-layout-2col">'
+        .n. hed(gTxt('smd_at_tab_name'), 1, array('class' => 'txp-heading'))
+        .n. '</div>'
+        .n. '<div class="txp-layout-2col">'
+        .n. graf(
+            n. '<a href="?event='. $smd_at_event. a. 'step=smd_at_setup">'. gTxt('smd_at_setup'). '</a>'
+            .n. gTxt('smd_at_help_link', array('{link}' => $helpLink))
+        .n. '<a href="#" onclick="return smd_getval(\'new\', \'smd_at_clone\');"><span class="ui-icon ui-extra-icon-new-document"></span> '.gTxt('smd_at_new').'</a>'
+        .n. '<p id="pop_new" class="smd_popup txp-list-options" hidden>'
+        .n. '<span>'. gTxt('smd_at_new_skin'). '</span>'.n. '<input type="text" name="smd_text_name" value="" size="'. INPUT_REGULAR. '" /> <a href="#">['. gTxt('smd_at_confirm'). ']</a>'
+        .n. '</p>'
+            , array('class' => 'txp-actions txp-actions-inline')
+        )
+        .n. '</div>'
 
-    echo '<div class="txp-container">',
-        '<form method="post" name="longform" action="', join_qs($qs), '">';
+        .n. '<div class="smd_at_layout_grid">'
+        .n. '<div id="smd_control" class="txp-control-panel">'
+        .n. (($uncrushers)
+            ? upload_form(gTxt('smd_at_install_skin'), '', 'smd_at_import', $smd_at_event, '', $max_theme_size)
+            .n. tag(gTxt('smd_at_supported_import', array('{types}' => (($uncrushers) ? join(', ', $uncrushers) : gTxt('none')))), 'div', array('class' => 'txp-form-field-instructions'))
+            : ''
+            )
+        .n. '</div>';
 
-    $hdrow = hed(gTxt('smd_at_list_title'), 2);
+    echo '<div class="txp-layout-1col"><form method="post" name="longform" action="' . join_qs($qs) . '">';
+
     if ($layout=="0") {
-        echo '<div class="txp-listtables">',
-            startTable('','','txp-list',5),
-            tr(
-                tda($hdrow, ' colspan="7"')
-            ),
+        echo '<div class="txp-listtables">'.
+            startTable('', '', 'txp-list', 5).
             assHead(
                 gTxt('smd_at_skin_gbl'),
                 'author',
@@ -439,11 +450,12 @@ EOJS
                 gTxt('smd_at_actions')
             );
     } else {
-        echo $hdrow, '<div class="txp-grid">';
+        echo '<div class="txp-grid">';
     }
-    if( is_callable('fsockopen') )
+
+    if (is_callable('fsockopen')) {
         $transport = 'fsock';
-    elseif( is_callable('curl_init') ) {
+    } elseif (is_callable('curl_init')) {
         $transport = 'curl';
     } else {
         $transport = '';
@@ -494,6 +506,7 @@ EOJS
 
     $smd_at_vlast = '';
     $feeds = array();
+
     if (isset($prefs['smd_at_versions']) && isset($prefs['smd_at_vlast'])) {
         if (time() - $prefs['smd_at_vlast'] < 86400) {
             // Last updated within the last day, so read the cached version numbers
@@ -530,12 +543,12 @@ EOJS
                         ? '<a href="'.$switch_link.'" title="'.gTxt('smd_at_apply_skin').'">'.$skintext.(($thumbnail) ? br.$thumbnail : '').'</a>'
                         : '<a href="'.$switch_link.'" title="'.gTxt('smd_at_apply_skin').'">'.(($thumbnail) ? $thumbnail : gTxt('smd_at_apply_skin')).'</a>';
         $authblock = (($skinfo && strpos($skinfo['author_uri'], "http://") === 0) ? '<a href="'.$skinfo['author_uri'].'">'.$skinfo['author'].'</a>' : (($skinfo) ? $skinfo['author'] : '-'));
-        $actblock = '<a href="?event='.$smd_at_event.a.'step=smd_at_edit'.a.'skin='.$skin_name.'">['.gTxt('edit').']</a>'
-            . sp .(($skinfo) ? '<a href="#" onclick="return smd_getval(\''.$skin_name.'\', \'smd_at_clone\');">['.gTxt('smd_at_clone').']</a>' : '')
-            . sp .(($skinfo && $crushers) ? '<a href="#" onclick="return smd_getcrush(\''.$skin_name.'\');">['.gTxt('smd_at_export').']</a>' : '')
-            . sp .((in_array($skin_name, $smd_core_themes) || in_array($skin_name, $bases)) ? '' : '<a href="?event='.$smd_at_event.a.'step=smd_at_delete'.a.'skin='.$skin_name.a.'page='.$page.a.'_txp_token='.form_token().'" onclick="return confirm(\''.gTxt('smd_at_delete_confirm', array('{skin}' => $skin_name)).'\');">['.gTxt('delete').']</a>');
-        $cloneblock = '<p id="pop_'.$skin_name.'" class="smd_popup empty"><span>'.gTxt('smd_at_new_cloneskin').'</span>'.n.'<input type="text" name="smd_text_name" value="" size="'.INPUT_MEDIUM.'" class="input-medium" />'.n.'<a href="#">['.strong(gTxt('smd_at_confirm')).']</a></p>';
-        $crushblock = (($crushers) ? '<p id="crush_'.$skin_name.'" class="smd_popup empty"><span>'.gTxt('smd_at_crush_format').'</span>'.radioSet($crushers, $skin_name.'_crush', $at_prefs['smd_at_crush']).n.'<a href="#">['.strong(gTxt('smd_at_confirm')).']</a></p>' : '');
+        $actblock = '<p class="txp-actions"><a href="?event='.$smd_at_event.a.'step=smd_at_edit'.a.'skin='.$skin_name.'"><span class="ui-icon ui-icon-pencil"></span> '.gTxt('edit').'</a>'
+            . (($skinfo) ? '<a href="#" onclick="return smd_getval(\''.$skin_name.'\', \'smd_at_clone\');"><span class="ui-icon ui-icon-copy"></span> '.gTxt('smd_at_clone').'</a>' : '')
+            . (($skinfo && $crushers) ? '<a href="#" onclick="return smd_getcrush(\''.$skin_name.'\');"><span class="ui-icon ui-icon-extlink"></span> '.gTxt('smd_at_export').'</a>' : '')
+            . ((in_array($skin_name, $smd_core_themes) || in_array($skin_name, $bases)) ? '' : '<a href="?event='.$smd_at_event.a.'step=smd_at_delete'.a.'skin='.$skin_name.a.'page='.$page.a.'_txp_token='.form_token().'" onclick="return confirm(\''.gTxt('smd_at_delete_confirm', array('{skin}' => $skin_name)).'\');"><span class="ui-icon ui-icon-close"></span> '.gTxt('delete').'</a></p>');
+        $cloneblock = '<p id="pop_'.$skin_name.'" class="smd_popup" hidden><span>'.gTxt('smd_at_new_cloneskin').'</span>'.n.'<input type="text" name="smd_text_name" value="" size="'.INPUT_MEDIUM.'" class="input-medium" />'.n.'<a class="navlink" href="#">'.strong(gTxt('smd_at_confirm')).'</a></p>';
+        $crushblock = (($crushers) ? '<p id="crush_'.$skin_name.'" class="smd_popup" hidden><span>'.gTxt('smd_at_crush_format').'</span>'.radioSet($crushers, $skin_name.'_crush', $at_prefs['smd_at_crush']).n.'<a class="navlink" href="#">'.strong(gTxt('smd_at_confirm')).'</a></p>' : '');
         $verblock = ($skinfo) ? ((isset($feeds[$feed_skin_name]) && isset($feeds[$feed_skin_name]['summary']) && version_compare($feeds[$feed_skin_name]['summary'],$skinfo['version'])===1) ? '<a href="'.$feeds[$feed_skin_name]['link'].'" class="smd_at_update">'.gTxt('smd_at_version').$skinfo['version'].'</a>' : gTxt('smd_at_version').$skinfo['version']) : '';
 
         if ($layout==0) {
@@ -565,7 +578,7 @@ EOJS
 
     echo n, '</div>',
         n, tInput(),
-        n, '</form>',
+        n, '</form></div>',
         n, '<div id="list_navigation" class="txp-navigation">',
         n, nav_form($smd_at_event, $page, $numPages, NULL, NULL, NULL, NULL),
         n, pageby_form($smd_at_event, $pageby),
@@ -1627,7 +1640,7 @@ function smd_at_setup($message = '')
             .n. '<div class="txp-layout-2col">'
             .n. '<h1 class="txp-heading">'.gTxt('smd_at_prefs_title').'</h1>'
             .n. '</div>'
-            .n. '<div id="smd_at_control" class="txp-layout-2col">'
+            .n. '<div class="txp-layout-2col">'
             .n. $btnList
             .n. '</div>'
         .n. '<div class="txp-layout-1col">'
