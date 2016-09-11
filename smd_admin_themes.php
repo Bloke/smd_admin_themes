@@ -55,104 +55,99 @@ $plugin['flags'] = '3';
 // abc_string_name => Localized String
 
 $plugin['textpack'] = <<<EOT
-#@smd_at
-smd_at_actions => Actions
-smd_at_allowed_skins => Allowed themes
-smd_at_all_themes => All themes
-smd_at_apply_skin => Apply this theme
-smd_at_avail_title => Available themes
-smd_at_based_on => (based on {skin})
-smd_at_by => by
-smd_at_case_sort => Case-sensitive theme list
-smd_at_clear => none
-smd_at_clone => Base
-smd_at_confirm => Go
-smd_at_core_theme => Cannot delete {skin}: core theme
-smd_at_core_theme_file => Cannot delete files from {skin}: core theme
-smd_at_crush_format => Format
-smd_at_crush_type => Export compression type
-smd_at_css => Stylesheet
-smd_at_c_bzip2 => BZip
-smd_at_c_gzip => GZip
-smd_at_c_tar => Tar
-smd_at_c_zip => Zip
-smd_at_delete_confirm => Really delete theme {skin}?
-smd_at_delete_failed => Delete failed. Try removing it manually
-smd_at_edit_lbl => Edit {theme} theme
-smd_at_empty_info => You should choose a file first
-smd_at_export => Export
-smd_at_filename_format => Filename format
-smd_at_files_deleted => Deleted: {list}. Note that empty folders may need removing manually
-smd_at_file_name => File name
-smd_at_file_not_deleted => File {name} <strong>not</strong> deleted
-smd_at_file_saved => File {name} saved
-smd_at_find_theme => Browse themes
-smd_at_folder => ... to folder
-smd_at_folders => Folder
-smd_at_folder_deleted => Folder {name} deleted
-smd_at_folder_name => Folder
-smd_at_global_skin => Default theme
-smd_at_help_link => <a href="{link}">Help</a>
-smd_at_image_files => Image
-smd_at_import_failed => Installation failed :-( Check the archive structure
-smd_at_import_ok => Installation successful.
-smd_at_install_skin => Install theme
-smd_at_is_global => (default)
-smd_at_js => Javascript
-smd_at_layout => Layout method
-smd_at_layout_grid => Grid
-smd_at_layout_list => List
-smd_at_manage_lbl => Theme manager
-smd_at_max_theme_size => Max theme file size (bytes)
-smd_at_mkdir_failed => Cannot create directory for file {name}. Try manually creating it.
-smd_at_name_empty => You should give your theme a name
-smd_at_new => Create new theme
-smd_at_new_cloneskin => Name of copy
-smd_at_new_file => New file
-smd_at_new_skin => Theme name
-smd_at_other => Other files
-smd_at_other_files => Others
-smd_at_per_group => Theme per priv level
-smd_at_per_site => One theme for all
-smd_at_per_user => Theme per user
-smd_at_php => PHP
-smd_at_prefs_deleted => Preferences deleted
-smd_at_prefs_installed => Preferences installed
-smd_at_prefs_title => Admin theme preferences
-smd_at_preview => Preview of {name}
-smd_at_preview_image => View image
-smd_at_renamed => Renamed to {name}
-smd_at_rename_failed => Rename failed
-smd_at_scss => SCSS
-smd_at_set => Set
-smd_at_setup => Preferences
-smd_at_skinner => Theme
-smd_at_skin_cloned => Theme extended as {name}
-smd_at_skin_created => Theme {name} created
-smd_at_skin_deleted => Theme {name} deleted
-smd_at_skin_exists => Theme {name} already exists
-smd_at_skin_files => Theme files
-smd_at_skin_gbl => Theme
-smd_at_skin_groups => Group themes
-smd_at_skin_switched => Theme switched to {skin}
-smd_at_skin_system => Theme system
-smd_at_ssc => Styleplate
-smd_at_supported_import => Supported import types: {types}
-smd_at_tab_name => Admin themes
-smd_at_textile => Textile
-smd_at_thumbsize => Thumb dimensions
-smd_at_times => x
-smd_at_txt => Text
-smd_at_unsupported_compressiontype => {crush} is not a supported compression format in this installation
-smd_at_unsupported_filetype => File is not of a supported type
-smd_at_unsupported_fudge => : hit Save again to store anyway
-smd_at_upload_report => Uploaded {num_success} files(s) {uploaded}. Failed: {num_fail}
-smd_at_version => v
-smd_at_work => Maintenance mode
-smd_at_work_admin_message => Website is in <a href="{url}">Maintenance Mode</a>
-smd_at_work_enabled => Maintenance mode enabled
-smd_at_work_message => Maintenance message
-smd_at_work_test => Test
+#@smd_adth
+smd_adth_actions => Actions
+smd_adth_allowed_skins => Allowed themes
+smd_adth_all_themes => All themes
+smd_adth_apply_skin => Apply this theme
+smd_adth_avail_title => Available themes
+smd_adth_based_on => (based on {skin})
+smd_adth_by => by
+smd_adth_case_sort => Case-sensitive theme list
+smd_adth_clear => none
+smd_adth_clone => Base
+smd_adth_confirm => Go
+smd_adth_core_theme => Cannot delete {skin}: core theme
+smd_adth_core_theme_file => Cannot delete files from {skin}: core theme
+smd_adth_crush_format => Format:
+smd_adth_crush_type => Export compression type
+smd_adth_css => Stylesheet
+smd_adth_c_bzip2 => BZip
+smd_adth_c_gzip => GZip
+smd_adth_c_tar => Tar
+smd_adth_c_zip => Zip
+smd_adth_delete_confirm => Really delete theme {skin}?
+smd_adth_delete_failed => Delete failed. Try removing it manually
+smd_adth_edit_lbl => Edit {theme} theme
+smd_adth_empty_info => You should choose a file first
+smd_adth_export => Export
+smd_adth_filename_format => Filename format
+smd_adth_files_deleted => Deleted: {list}. Note that empty folders may need removing manually
+smd_adth_file_name => File name
+smd_adth_file_not_deleted => File {name} <strong>not</strong> deleted
+smd_adth_file_saved => File {name} saved
+smd_adth_find_theme => Browse themes
+smd_adth_folder => ... to folder
+smd_adth_folders => Folder
+smd_adth_folder_deleted => Folder {name} deleted
+smd_adth_folder_name => Folder
+smd_adth_global_skin => Default theme
+smd_adth_help_link => <a href="{link}">Help</a>
+smd_adth_image_files => Image
+smd_adth_import_failed => Installation failed :-( Check the archive structure
+smd_adth_import_ok => Installation successful.
+smd_adth_install_skin => Install theme
+smd_adth_is_global => (default)
+smd_adth_js => Javascript
+smd_adth_layout => Layout method
+smd_adth_layout_grid => Grid
+smd_adth_layout_list => List
+smd_adth_manage_lbl => Theme manager
+smd_adth_max_theme_size => Max theme file size (bytes)
+smd_adth_mkdir_failed => Cannot create directory for file {name}. Try manually creating it.
+smd_adth_name_empty => You should give your theme a name
+smd_adth_new => Create new theme
+smd_adth_new_cloneskin => Name of copy
+smd_adth_new_file => New file
+smd_adth_new_skin => Theme name
+smd_adth_other => Other files
+smd_adth_other_files => Others
+smd_adth_per_group => Theme per priv level
+smd_adth_per_site => One theme for all
+smd_adth_per_user => Theme per user
+smd_adth_php => PHP
+smd_adth_prefs_deleted => Preferences deleted
+smd_adth_prefs_installed => Preferences installed
+smd_adth_prefs_title => Admin theme preferences
+smd_adth_preview => Preview of {name}
+smd_adth_preview_image => View image
+smd_adth_renamed => Renamed to {name}
+smd_adth_rename_failed => Rename failed
+smd_adth_scss => SCSS
+smd_adth_set => Set
+smd_adth_setup => Preferences
+smd_adth_skinner => Theme
+smd_adth_skin_cloned => Theme extended as {name}
+smd_adth_skin_created => Theme {name} created
+smd_adth_skin_deleted => Theme {name} deleted
+smd_adth_skin_exists => Theme {name} already exists
+smd_adth_skin_files => Theme files
+smd_adth_skin_gbl => Theme
+smd_adth_skin_groups => Group themes
+smd_adth_skin_switched => Theme switched to {skin}
+smd_adth_skin_system => Theme system
+smd_adth_ssc => Styleplate
+smd_adth_supported_import => Supported import types: {types}
+smd_adth_tab_name => Admin themes
+smd_adth_textile => Textile
+smd_adth_thumbsize => Thumb dimensions
+smd_adth_times => x
+smd_adth_txt => Text
+smd_adth_unsupported_compressiontype => {crush} is not a supported compression format in this installation
+smd_adth_unsupported_filetype => File is not of a supported type
+smd_adth_unsupported_fudge => : hit Save again to store anyway
+smd_adth_upload_report => Uploaded {num_success} files(s) {uploaded}. Failed: {num_fail}
+smd_adth_version => v
 EOT;
 
 if (!defined('txpinterface'))
@@ -205,7 +200,7 @@ if (txpinterface === 'admin') {
 
     add_privs($smd_at_event, $smd_at_privs);
     add_privs('plugin_prefs.'.$smd_at_fullev, $smd_at_privs);
-    register_tab("extensions", $smd_at_event, gTxt('smd_at_tab_name'));
+    register_tab("extensions", $smd_at_event, gTxt('smd_adth_tab_name'));
     register_callback('smd_at_options', 'plugin_prefs.'.$smd_at_fullev);
     register_callback('smd_at_welcome', 'plugin_lifecycle.'.$smd_at_fullev);
     register_callback('smd_at', $smd_at_event);
@@ -215,7 +210,7 @@ if (txpinterface === 'admin') {
 
     if (isset($prefs['smd_at_system']) && $prefs['smd_at_system'] == 2) {
         add_privs($smd_at_adm_event, '2,3,4,5,6');
-        register_tab("admin", $smd_at_adm_event, gTxt('smd_at_skinner'));
+        register_tab("admin", $smd_at_adm_event, gTxt('smd_adth_skinner'));
         register_callback('smd_admat', $smd_at_adm_event);
     }
 }
@@ -306,7 +301,7 @@ function smd_at_welcome($event, $step)
 function smd_at_link()
 {
     global $smd_at_event;
-    return href(gTxt('smd_at_manage_lbl'), '?event='.$smd_at_event);
+    return href(gTxt('smd_adth_manage_lbl'), '?event='.$smd_at_event);
 }
 
 // ------------------------
@@ -346,7 +341,7 @@ function smd_at_list($message = '')
 
     $bases = array_unique($bases);
 
-    pagetop(gTxt('smd_at_manage_lbl'), $message);
+    pagetop(gTxt('smd_adth_manage_lbl'), $message);
 
     // Handle paging.
     // @todo Why does plugin not have its own pageby?
@@ -416,15 +411,15 @@ EOJS
     // List the available skins.
     echo '<div class="txp-layout">'
         .n. '<div class="txp-layout-2col">'
-        .n. hed(gTxt('smd_at_tab_name'), 1, array('class' => 'txp-heading'))
+        .n. hed(gTxt('smd_adth_tab_name'), 1, array('class' => 'txp-heading'))
         .n. '</div>'
         .n. '<div class="txp-layout-2col">'
         .n. graf(
-            n. '<a href="?event='. $smd_at_event. a. 'step=smd_at_setup">'. gTxt('smd_at_setup'). '</a>'
-            .n. gTxt('smd_at_help_link', array('{link}' => $helpLink))
-        .n. '<a href="#" onclick="return smd_getval(\'new\', \'smd_at_clone\');"><span class="ui-icon ui-extra-icon-new-document"></span> '.gTxt('smd_at_new').'</a>'
+            n. '<a href="?event='. $smd_at_event. a. 'step=smd_at_setup">'. gTxt('smd_adth_setup'). '</a>'
+            .n. gTxt('smd_adth_help_link', array('{link}' => $helpLink))
+        .n. '<a href="#" onclick="return smd_getval(\'new\', \'smd_at_clone\');"><span class="ui-icon ui-extra-icon-new-document"></span> '.gTxt('smd_adth_new').'</a>'
         .n. '<p id="pop_new" class="smd_popup txp-list-options" hidden>'
-        .n. '<span>'. gTxt('smd_at_new_skin'). '</span>'.n. '<input type="text" name="smd_text_name" value="" size="'. INPUT_REGULAR. '" /> <a class="navlink" href="#">'. gTxt('smd_at_confirm'). '</a>'
+        .n. '<span>'. gTxt('smd_adth_new_skin'). '</span>'.n. '<input type="text" name="smd_text_name" value="" size="'. INPUT_REGULAR. '" /> <a class="navlink" href="#">'. gTxt('smd_adth_confirm'). '</a>'
         .n. '</p>'
             , array('class' => 'txp-actions txp-actions-inline')
         )
@@ -433,8 +428,8 @@ EOJS
         .n. '<div class="smd_at_layout_grid">'
         .n. '<div id="smd_control" class="txp-control-panel">'
         .n. (($uncrushers)
-            ? upload_form(gTxt('smd_at_install_skin'), '', 'smd_at_import', $smd_at_event, '', $max_theme_size)
-            .n. tag(gTxt('smd_at_supported_import', array('{types}' => (($uncrushers) ? join(', ', $uncrushers) : gTxt('none')))), 'div', array('class' => 'txp-form-field-instructions'))
+            ? upload_form(gTxt('smd_adth_install_skin'), '', 'smd_at_import', $smd_at_event, '', $max_theme_size)
+            .n. tag(gTxt('smd_adth_supported_import', array('{types}' => (($uncrushers) ? join(', ', $uncrushers) : gTxt('none')))), 'div', array('class' => 'txp-form-field-instructions'))
             : ''
             )
         .n. '</div>';
@@ -445,11 +440,11 @@ EOJS
         echo '<div class="txp-listtables">'.
             startTable('', '', 'txp-list', 5).
             assHead(
-                gTxt('smd_at_skin_gbl'),
+                gTxt('smd_adth_skin_gbl'),
                 'author',
                 gTxt('version'),
                 'description',
-                gTxt('smd_at_actions')
+                gTxt('smd_adth_actions')
             );
     } else {
         echo '<div class="txp-grid">';
@@ -538,20 +533,20 @@ EOJS
 
         $thumbnail = smd_at_get_thumb($skinfo, 1);
         $this_skin = ($skinfo) ? $skinfo['dname'] : $skin_name;
-        $is_gbl = ($skin_name == $at_prefs['smd_at_global_skin']) ? gTxt('smd_at_is_global') : '';
+        $is_gbl = ($skin_name == $at_prefs['smd_at_global_skin']) ? gTxt('smd_adth_is_global') : '';
         $switch_link = '?event='.$smd_at_event.a.'step=smd_at_switch'.a.'nextstep=smd_at_list'.a.'skin='.$skin_name.a.'page='.$page.a.'_txp_token='.form_token();
-        $skintext = $this_skin .n. $is_gbl .n. (($skinfo && $skinfo['based_on']) ? n.gTxt('smd_at_based_on', array('{skin}' => $skinfo['based_on'])) : '');
+        $skintext = $this_skin .n. $is_gbl .n. (($skinfo && $skinfo['based_on']) ? n.gTxt('smd_adth_based_on', array('{skin}' => $skinfo['based_on'])) : '');
         $thumblock = ($layout==0)
-                        ? '<a href="'.$switch_link.'" title="'.gTxt('smd_at_apply_skin').'">'.$skintext.(($thumbnail) ? br.$thumbnail : '').'</a>'
-                        : '<a href="'.$switch_link.'" title="'.gTxt('smd_at_apply_skin').'">'.(($thumbnail) ? $thumbnail : gTxt('smd_at_apply_skin')).'</a>';
+                        ? '<a href="'.$switch_link.'" title="'.gTxt('smd_adth_apply_skin').'">'.$skintext.(($thumbnail) ? br.$thumbnail : '').'</a>'
+                        : '<a href="'.$switch_link.'" title="'.gTxt('smd_adth_apply_skin').'">'.(($thumbnail) ? $thumbnail : gTxt('smd_adth_apply_skin')).'</a>';
         $authblock = (($skinfo && strpos($skinfo['author_uri'], "http://") === 0) ? '<a href="'.$skinfo['author_uri'].'">'.$skinfo['author'].'</a>' : (($skinfo) ? $skinfo['author'] : '-'));
         $actblock = '<p class="txp-actions"><a href="?event='.$smd_at_event.a.'step=smd_at_edit'.a.'skin='.$skin_name.'"><span class="ui-icon ui-icon-pencil"></span> '.gTxt('edit').'</a>'
-            . (($skinfo) ? '<a href="#" onclick="return smd_getval(\''.$skin_name.'\', \'smd_at_clone\');"><span class="ui-icon ui-icon-copy"></span> '.gTxt('smd_at_clone').'</a>' : '')
-            . (($skinfo && $crushers) ? '<a href="#" onclick="return smd_getcrush(\''.$skin_name.'\');"><span class="ui-icon ui-icon-extlink"></span> '.gTxt('smd_at_export').'</a>' : '')
-            . ((in_array($skin_name, $smd_core_themes) || in_array($skin_name, $bases)) ? '' : '<a href="?event='.$smd_at_event.a.'step=smd_at_delete'.a.'skin='.$skin_name.a.'page='.$page.a.'_txp_token='.form_token().'" onclick="return confirm(\''.gTxt('smd_at_delete_confirm', array('{skin}' => $skin_name)).'\');"><span class="ui-icon ui-icon-close"></span> '.gTxt('delete').'</a></p>');
-        $cloneblock = '<p id="pop_'.$skin_name.'" class="smd_popup" hidden><span>'.gTxt('smd_at_new_cloneskin').'</span>'.n.'<input type="text" name="smd_text_name" value="" size="'.INPUT_MEDIUM.'" class="input-medium" />'.n.'<a class="navlink" href="#">'.strong(gTxt('smd_at_confirm')).'</a></p>';
-        $crushblock = (($crushers) ? '<p id="crush_'.$skin_name.'" class="smd_popup" hidden><span>'.gTxt('smd_at_crush_format').'</span>'.radioSet($crushers, $skin_name.'_crush', $at_prefs['smd_at_crush']).n.'<a class="navlink" href="#">'.strong(gTxt('smd_at_confirm')).'</a></p>' : '');
-        $verblock = ($skinfo) ? ((isset($feeds[$feed_skin_name]) && isset($feeds[$feed_skin_name]['summary']) && version_compare($feeds[$feed_skin_name]['summary'],$skinfo['version'])===1) ? '<a href="'.$feeds[$feed_skin_name]['link'].'" class="smd_at_update">'.gTxt('smd_at_version').$skinfo['version'].'</a>' : gTxt('smd_at_version').$skinfo['version']) : '';
+            . (($skinfo) ? '<a href="#" onclick="return smd_getval(\''.$skin_name.'\', \'smd_at_clone\');"><span class="ui-icon ui-icon-copy"></span> '.gTxt('smd_adth_clone').'</a>' : '')
+            . (($skinfo && $crushers) ? '<a href="#" onclick="return smd_getcrush(\''.$skin_name.'\');"><span class="ui-icon ui-icon-extlink"></span> '.gTxt('smd_adth_export').'</a>' : '')
+            . ((in_array($skin_name, $smd_core_themes) || in_array($skin_name, $bases)) ? '' : '<a href="?event='.$smd_at_event.a.'step=smd_at_delete'.a.'skin='.$skin_name.a.'page='.$page.a.'_txp_token='.form_token().'" onclick="return confirm(\''.gTxt('smd_adth_delete_confirm', array('{skin}' => $skin_name)).'\');"><span class="ui-icon ui-icon-close"></span> '.gTxt('delete').'</a></p>');
+        $cloneblock = '<p id="pop_'.$skin_name.'" class="smd_popup" hidden><span>'.gTxt('smd_adth_new_cloneskin').'</span>'.n.'<input type="text" name="smd_text_name" value="" size="'.INPUT_MEDIUM.'" class="input-medium" />'.n.'<a class="navlink" href="#">'.strong(gTxt('smd_adth_confirm')).'</a></p>';
+        $crushblock = (($crushers) ? '<p id="crush_'.$skin_name.'" class="smd_popup" hidden><span>'.gTxt('smd_adth_crush_format').'</span>'.radioSet($crushers, $skin_name.'_crush', $at_prefs['smd_at_crush']).n.'<a class="navlink" href="#">'.strong(gTxt('smd_adth_confirm')).'</a></p>' : '');
+        $verblock = ($skinfo) ? ((isset($feeds[$feed_skin_name]) && isset($feeds[$feed_skin_name]['summary']) && version_compare($feeds[$feed_skin_name]['summary'],$skinfo['version'])===1) ? '<a href="'.$feeds[$feed_skin_name]['link'].'" class="smd_at_update">'.gTxt('smd_adth_version').$skinfo['version'].'</a>' : gTxt('smd_adth_version').$skinfo['version']) : '';
 
         if ($layout==0) {
             echo tr(
@@ -566,7 +561,7 @@ EOJS
             echo '<div class="txp-grid-cell', (($skin_name == $curr_skin) ? ' highlight' : ''), '">',
                     n, hed($skintext, 3),
                     n, '<p>', $thumblock, '</p>',
-                    n, '<p>', $verblock, n, gTxt('smd_at_by'), n, $authblock, '</p>',
+                    n, '<p>', $verblock, n, gTxt('smd_adth_by'), n, $authblock, '</p>',
                     n, '<p>', $actblock, '</p>',
                     n, $cloneblock,
                     n, $crushblock,
@@ -696,7 +691,7 @@ function smd_at_edit($message = '')
     $is_svg = ($ext == 'svg');
 
     // Begin rendering the page
-    pagetop(gTxt('smd_at_edit_lbl', array('{theme}' => $skin)), $message);
+    pagetop(gTxt('smd_adth_edit_lbl', array('{theme}' => $skin)), $message);
 
     $skin_list = smd_at_read_skins();
 
@@ -727,7 +722,7 @@ function smd_at_edit($message = '')
 
     $fileList = array();
     $fileList[] = '<div id="content_switcher" class="txp-layout-4col-alt" role="region">'
-        .n. hed(gTxt('smd_at_skin_files'), 2)
+        .n. hed(gTxt('smd_adth_skin_files'), 2)
         .n. $skinChange
         .$listActions
 //      .n. upload_form(gTxt('upload_file'), '', 'smd_at_upload', $smd_at_event, $skin, $file_max_upload_size, '', '')
@@ -749,7 +744,7 @@ function smd_at_edit($message = '')
             $is_img = smd_at_is_image($currfile);
             $is_bin = smd_at_is_binary($currfile);
 
-            $edit = $is_img ? '<a href="'.$currfile.'" title="'.gTxt('smd_at_preview_image').'">'.$showfile.'</a>' : ($is_bin ? '<span class="smd-at-list-name">' . $showfile . '</span>' : '<a href="?event='.$smd_at_event.a.'step=smd_at_edit'.a.'skin='.$skin.a.'file='.$justfile.a.'dir='.$justdir.'">'.$showfile.'</a>');
+            $edit = $is_img ? '<a href="'.$currfile.'" title="'.gTxt('smd_adth_preview_image').'">'.$showfile.'</a>' : ($is_bin ? '<span class="smd-at-list-name">' . $showfile . '</span>' : '<a href="?event='.$smd_at_event.a.'step=smd_at_edit'.a.'skin='.$skin.a.'file='.$justfile.a.'dir='.$justdir.'">'.$showfile.'</a>');
             $modbox = ($basefile == $skin)
                 ?   ''
                 :   '<input type="checkbox" name="selected_files[]" value="'.$justdir.DS.$justfile.'" />';
@@ -792,11 +787,11 @@ function smd_at_edit($message = '')
     // Render the rest of the page.
     echo '<div class="txp-layout">'
         .'<div class="txp-layout-2col">'
-        .hed(gTxt('smd_at_edit_lbl', array('{theme}' => (($skinfo) ? $skinfo['dname'] : $skin))), 1)
+        .hed(gTxt('smd_adth_edit_lbl', array('{theme}' => (($skinfo) ? $skinfo['dname'] : $skin))), 1)
         .'</div>'
         .n. '<div class="txp-layout-2col">'
         .graf(
-            href(gTxt('smd_at_all_themes'), '?event=' . $smd_at_event, array('class' => 'smd_at_btn'))
+            href(gTxt('smd_adth_all_themes'), '?event=' . $smd_at_event, array('class' => 'smd_at_btn'))
             , array('class' => 'txp-actions txp-actions-inline')
         )
         .n. '</div>'
@@ -810,7 +805,7 @@ function smd_at_edit($message = '')
         .n. sInput('smd_at_upload')
         .n. tInput()
         .n. '<input type="file" name="smd_at_file[]" multiple="true" />'.sp.fInput('submit', '', gTxt('upload'))
-        .n. graf('<label for="smd_at_folder">'.gTxt('smd_at_folder').'</label>' .n. fInput('text', 'smd_at_folder', ps('smd_at_folder'), '', '', '', INPUT_MEDIUM, '', 'smd_at_folder'))
+        .n. graf('<label for="smd_at_folder">'.gTxt('smd_adth_folder').'</label>' .n. fInput('text', 'smd_at_folder', ps('smd_at_folder'), '', '', '', INPUT_MEDIUM, '', 'smd_at_folder'))
         .n. '</form>'
         .n. '</div>'
         .n. '</div>'
@@ -819,11 +814,11 @@ function smd_at_edit($message = '')
         .'<div class="txp-layout-4col-3span" role="region">'
         .form(
             n. '<p class="txp-actions txp-actions-inline">'
-            .n. '<a href="?event='.$smd_at_event.a.'step=smd_at_newfile'.a.'skin='.$skin.'"><span class="ui-icon ui-extra-icon-new-document"></span> '.gTxt('smd_at_new_file').'</a>'
+            .n. '<a href="?event='.$smd_at_event.a.'step=smd_at_newfile'.a.'skin='.$skin.'"><span class="ui-icon ui-extra-icon-new-document"></span> '.gTxt('smd_adth_new_file').'</a>'
             .n. '</p>'
             .n.'<div class="txp-form-field">'
             .n.'<div class="txp-form-field-label">'
-            .n.'<label for="new_skin">' . gTxt('smd_at_file_name') . '</label>'
+            .n.'<label for="new_skin">' . gTxt('smd_adth_file_name') . '</label>'
             .n.'</div>'
             .n.'<div class="txp-form-field-value">'
             .n.'<input type="text" id="new_skin" name="new_skin" value="'.txpspecialchars($file).'" size="'.INPUT_REGULAR.'" />'
@@ -834,7 +829,7 @@ function smd_at_edit($message = '')
             .($step == 'smd_at_newfile'
                 ? n.'<div class="txp-form-field">'
                     .n.'<div class="txp-form-field-label">'
-                    .n.'<label for="new_skin_dir">' . gTxt('smd_at_folder_name') . '</label>'
+                    .n.'<label for="new_skin_dir">' . gTxt('smd_adth_folder_name') . '</label>'
                     .n.'</div>'
                     .n.'<div class="txp-form-field-value">'
                     .n.'<input type="text" id="new_skin_dir" name="new_skin_dir" value="'.txpspecialchars($dir).'" size="'.INPUT_REGULAR.'" />'
@@ -902,7 +897,7 @@ function smd_at_preview()
         break;
     }
 
-    pagetop(gTxt('smd_at_preview', array('{name}' => $fp)));
+    pagetop(gTxt('smd_adth_preview', array('{name}' => $fp)));
     echo n,'<div id="smd_at_container" class="txp-container txp-view">',
         n,'<div class="text-column">' . $out . '</div>',
         n,'</div>';
@@ -956,14 +951,14 @@ function smd_at_clone()
     $new_skin = rawurlencode($new_skin);
 
     if (empty($new_skin)) {
-        $msg = array(gTxt('smd_at_name_empty'), E_WARNING);
+        $msg = array(gTxt('smd_adth_name_empty'), E_WARNING);
     }
 
     // Check the new name isn't already in use
     $themes = smd_at_read_skins();
 
     if (in_array($new_skin, $themes)) {
-        $msg = array(gTxt('smd_at_skin_exists', array('{name}' => $new_skin)), E_ERROR);
+        $msg = array(gTxt('smd_adth_skin_exists', array('{name}' => $new_skin)), E_ERROR);
     }
 
     // No errors, so make a new dir and create the PHP file
@@ -1049,9 +1044,9 @@ EOF;
         fclose($fp);
 
         if ($skin) {
-            $msg = gTxt('smd_at_skin_cloned', array('{name}' => $new_skin));;
+            $msg = gTxt('smd_adth_skin_cloned', array('{name}' => $new_skin));;
         } else {
-            $msg = gTxt('smd_at_skin_created', array('{name}' => $new_skin));;
+            $msg = gTxt('smd_adth_skin_created', array('{name}' => $new_skin));;
         }
 
 //  $msg = gTxt('skin_not_created', array('{name}' => $new_skin));;
@@ -1072,7 +1067,7 @@ function smd_at_crush_options($type = 'compress')
         $crunchers = smd_crunch_capabilities($type);
         foreach (array('tar', 'gzip', 'zip', 'bzip2') as $cm) {
             if (in_array($cm, $crunchers)) {
-                $smd_crushers[$cm] = gTxt('smd_at_c_'.$cm);
+                $smd_crushers[$cm] = gTxt('smd_adth_c_'.$cm);
             }
         }
     }
@@ -1099,7 +1094,7 @@ function smd_at_export()
     // Check the passed compression format is valid
     $crushers = smd_at_crush_options('compress');
     if ($crush=='' || $crush=='undefined' || !array_key_exists($crush, $crushers)) {
-        $msg = array(gTxt('smd_at_unsupported_compressiontype', array('{crush}' => $crush)), E_WARNING);
+        $msg = array(gTxt('smd_adth_unsupported_compressiontype', array('{crush}' => $crush)), E_WARNING);
         smd_at_list($message);
         return;
     }
@@ -1147,33 +1142,33 @@ function smd_at_import()
             if ($validArchive) {
                 $zip->unzipAll($basedir, '', true, 0755);
                 $zip->close();
-                $message = gTxt('smd_at_import_ok');
+                $message = gTxt('smd_adth_import_ok');
             } else {
-                $message = array(gTxt('smd_at_import_failed'), E_ERROR);
+                $message = array(gTxt('smd_adth_import_failed'), E_ERROR);
             }
         } else if ($ext == 'tgz' && array_key_exists('gzip', $uncrushers)) {
             $zip = new smd_crunch_gzip_file(basename($file));
             $zip->set_options(array('basedir' => $basedir, 'overwrite' => 1));
             $zip->extract_files();
-            $message = gTxt('smd_at_import_ok');
+            $message = gTxt('smd_adth_import_ok');
         } else if ($ext == 'tbz2' && array_key_exists('bzip2', $uncrushers)) {
             $zip = new smd_crunch_bzip_file(basename($file));
             $zip->set_options(array('basedir' => $basedir, 'overwrite' => 1));
             $zip->extract_files();
-            $message = gTxt('smd_at_import_ok');
+            $message = gTxt('smd_adth_import_ok');
         } else if ($ext == 'tar') {
             $zip = new smd_crunch_tar_file(basename($file));
             $zip->set_options(array('basedir' => $basedir, 'overwrite' => 1));
             $zip->extract_files();
-            $message = gTxt('smd_at_import_ok');
+            $message = gTxt('smd_adth_import_ok');
         } else {
-            $message = array(gTxt('smd_at_unsupported_compressiontype', array('{crush}' => $ext)), E_WARNING);
+            $message = array(gTxt('smd_adth_unsupported_compressiontype', array('{crush}' => $ext)), E_WARNING);
         }
 
         // Remove the temporary file
         unlink($file);
     } else {
-        $message = array(gTxt('smd_at_empty_info'), E_WARNING);
+        $message = array(gTxt('smd_adth_empty_info'), E_WARNING);
     }
 
     smd_at_list($message);
@@ -1279,9 +1274,9 @@ function smd_at_upload()
                 }
             }
         }
-        $message = gTxt('smd_at_upload_report', array('{num_success}' => $up_count, '{num_fail}' => $fail_count, '{uploaded}' => join(', ', $uploaded)));
+        $message = gTxt('smd_adth_upload_report', array('{num_success}' => $up_count, '{num_fail}' => $fail_count, '{uploaded}' => join(', ', $uploaded)));
     } else {
-        $message = array(gTxt('smd_at_empty_info'), E_WARNING);
+        $message = array(gTxt('smd_adth_empty_info'), E_WARNING);
     }
 
     smd_at_edit($message);
@@ -1300,14 +1295,14 @@ function smd_at_delete()
     $message='';
 
     if (in_array($skin, $smd_core_themes)) {
-        $message = array(gTxt('smd_at_core_theme', array('{skin}' => $skin)), E_ERROR);
+        $message = array(gTxt('smd_adth_core_theme', array('{skin}' => $skin)), E_ERROR);
         smd_at_list($message);
     } else {
         $skindir = THEME.$skin;
         if (!smd_rmdir_recursive($skindir)) {
-            $message = array(gTxt('smd_at_delete_failed'), E_ERROR);
+            $message = array(gTxt('smd_adth_delete_failed'), E_ERROR);
         } else {
-            $message = gTxt('smd_at_skin_deleted', array('{name}' => $skin));
+            $message = gTxt('smd_adth_skin_deleted', array('{name}' => $skin));
         }
 
         // Handle situations if current skin has been deleted
@@ -1365,7 +1360,7 @@ function smd_at_delete_folder()
 
     if (file_exists($delfolder) && !in_array($skin, $smd_core_themes)) {
         smd_at_rrmdir($delfolder);
-        $message = gTxt('smd_at_folder_deleted', array('{name}' => $delfolder));
+        $message = gTxt('smd_adth_folder_deleted', array('{name}' => $delfolder));
     }
 
     smd_at_edit($message);
@@ -1396,7 +1391,7 @@ function smd_at_multi_edit()
             }
 
             if ($affected) {
-                $message = gTxt('smd_at_files_deleted', array('{list}' => join(', ', $affected)));
+                $message = gTxt('smd_adth_files_deleted', array('{list}' => join(', ', $affected)));
             }
 
             smd_at_edit($message);
@@ -1424,7 +1419,7 @@ function smd_at_save()
         $dir = $new_skin_dir;
         $ext = array_pop(explode ('.',$file));
         if (strtolower($file) != 'readme' && ($ext == '' || !in_array($ext, $editable))) {
-            $message = gTxt('smd_at_unsupported_filetype').gTxt('smd_at_unsupported_fudge');
+            $message = gTxt('smd_adth_unsupported_filetype').gTxt('smd_adth_unsupported_fudge');
             $msglev = E_WARNING;
             $_POST['file'] = $file;
             $_POST['dir'] = $dir;
@@ -1448,7 +1443,7 @@ function smd_at_save()
 
                 $ret = touch($filepath.$fname);
                 if ($ret === false) {
-                    $message = gTxt('smd_at_mkdir_failed', array('{name}' => $fname));
+                    $message = gTxt('smd_adth_mkdir_failed', array('{name}' => $fname));
                 }
             }
 
@@ -1472,7 +1467,7 @@ function smd_at_save()
                         $filepath = ($ren) ? $new_filepath : $filepath;
                         $_POST['skin'] = $filebits[0];
                     }
-                    $extraMsg = ($res) ? gTxt('smd_at_renamed', array('{name}' => $new_skin)) : gTxt('smd_at_rename_failed');
+                    $extraMsg = ($res) ? gTxt('smd_adth_renamed', array('{name}' => $new_skin)) : gTxt('smd_adth_rename_failed');
                 }
 
                 // Process any css replacements
@@ -1526,7 +1521,7 @@ function smd_at_save()
                     }
                 }
 
-                $message = gTxt('smd_at_file_saved', array('{name}' => $fname)).br.$extraMsg;
+                $message = gTxt('smd_adth_file_saved', array('{name}' => $fname)).br.$extraMsg;
             }
         }
     }
@@ -1635,7 +1630,7 @@ function smd_at_setup($message = '')
     $smd_at_styles = smd_at_get_style_rules();
     $at_prefs = smd_at_get_prefs(1);
 
-    pagetop(gTxt('smd_at_prefs_title'),$message);
+    pagetop(gTxt('smd_adth_prefs_title'),$message);
 
     $levels = get_groups();
     unset($levels[1]); // Publishers get special privs apart from the masses
@@ -1645,17 +1640,17 @@ function smd_at_setup($message = '')
     $uskins = explode(',', $at_prefs['smd_at_user_list']);
 
     $layout = $at_prefs['smd_at_layout'];
-    $clrBtn = ' [<span id="smd_clr" class="smd_fakebtn">'.gTxt('smd_at_clear').'</span>]';
-    $btnSet = fInput('submit', 'submit', gTxt('smd_at_set'), 'publish');
+    $clrBtn = ' [<span id="smd_clr" class="smd_fakebtn">'.gTxt('smd_adth_clear').'</span>]';
+    $btnSet = fInput('submit', 'submit', gTxt('smd_adth_set'), 'publish');
     $btnSave = graf(fInput('submit', 'submit', gTxt('save'), 'publish'));
     $btnList = graf(
-        href(gTxt('smd_at_all_themes'), '?event=' . $smd_at_event, array('class' => 'smd_at_btn'))
+        href(gTxt('smd_adth_all_themes'), '?event=' . $smd_at_event, array('class' => 'smd_at_btn'))
         , array('class' => 'txp-actions txp-actions-inline')
     );
     $radBtns = array(
-        gTxt('smd_at_per_site'),
-        gTxt('smd_at_per_group'),
-        gTxt('smd_at_per_user'),
+        gTxt('smd_adth_per_site'),
+        gTxt('smd_adth_per_group'),
+        gTxt('smd_adth_per_user'),
     );
 
     $skin_list = smd_at_read_skins();
@@ -1674,7 +1669,7 @@ function smd_at_setup($message = '')
 
     echo n. '<div class="txp-layout">'
             .n. '<div class="txp-layout-2col">'
-            .n. '<h1 class="txp-heading">'.gTxt('smd_at_prefs_title').'</h1>'
+            .n. '<h1 class="txp-heading">'.gTxt('smd_adth_prefs_title').'</h1>'
             .n. '</div>'
             .n. '<div class="txp-layout-2col">'
             .n. $btnList
@@ -1687,8 +1682,8 @@ function smd_at_setup($message = '')
         echo n. inputLabel('smd_at_crush', radioSet($crushers, 'smd_at_crush', $at_prefs['smd_at_crush']), 'smd_at_crush_type');
     }
 
-    echo n. inputLabel('smd_at_layout', radioSet(array(gTxt('smd_at_layout_list'), gTxt('smd_at_layout_grid')), 'smd_at_layout', $at_prefs['smd_at_layout']), 'smd_at_layout')
-        .n. inputLabel('smd_at_thumbsize', fInput('text', 'smd_at_tw', $at_prefs['smd_at_tw'],'input-xsmall','','',4).n.gTxt('smd_at_times').n.fInput('text', 'smd_at_th', $at_prefs['smd_at_th'],'input-xsmall','','',4), 'smd_at_thumbsize')
+    echo n. inputLabel('smd_at_layout', radioSet(array(gTxt('smd_adth_layout_list'), gTxt('smd_adth_layout_grid')), 'smd_at_layout', $at_prefs['smd_at_layout']), 'smd_at_layout')
+        .n. inputLabel('smd_at_thumbsize', fInput('text', 'smd_at_tw', $at_prefs['smd_at_tw'],'input-xsmall','','',4).n.gTxt('smd_adth_times').n.fInput('text', 'smd_at_th', $at_prefs['smd_at_th'],'input-xsmall','','',4), 'smd_at_thumbsize')
         .n. inputLabel('smd_at_filename_format', fInput('text', 'smd_at_filename_format', $at_prefs['smd_at_filename_format']), 'smd_at_filename_format')
         .n. inputLabel('smd_at_max_theme_size', fInput('text', 'smd_at_max_theme_size', $at_prefs['smd_at_max_theme_size']), 'smd_at_max_theme_size')
         .n. inputLabel('smd_at_global_skin', selectInput('smd_at_global_skin', $skinsel, $gbl_skin, 0, 0, 'smd_at_global_skin'), 'smd_at_global_skin')
@@ -1704,7 +1699,7 @@ function smd_at_setup($message = '')
     $priv_list .= '</select>';
 
     // Note the hidden skin group box; jQuery keeps track of any list changes and keeps it updated
-    $sela = '<div class="txp-form-field-label"><label>' . gTxt('smd_at_skin_groups') . '</label></div>';
+    $sela = '<div class="txp-form-field-label"><label>' . gTxt('smd_adth_skin_groups') . '</label></div>';
     $selb = hInput('smd_at_group_list', $at_prefs['smd_at_group_list']);
     $selb .= '<select id="smd_at_grps" name="smd_at_grps" class="list" size="'.$numLevs.'">';
 
@@ -1719,7 +1714,7 @@ function smd_at_setup($message = '')
     echo n. '<div class="txp-form-field smd_at_sel1">' .$sela.'<div class="txp-form-field-value">'.$selb.$priv_list.'</div></div>';
 
     // Option 2
-    $sela = '<div class="txp-form-field-label"><label>' . gTxt('smd_at_allowed_skins') . '</label></div>';
+    $sela = '<div class="txp-form-field-label"><label>' . gTxt('smd_adth_allowed_skins') . '</label></div>';
     $selb = '<select id="smd_at_user_list" name="smd_at_user_list[]" class="list" size="8" multiple="multiple">';
 
     foreach ($skin_list as $askin) {
@@ -1849,7 +1844,7 @@ EOJS
 // Note: value is passed in and not read directly from the prefs array in this function - intentionally
 function smd_at_pref_explode($val)
 {
-    $order = array_values(array(gTxt('smd_at_c_gzip'),gTxt('smd_at_c_bzip2'),gTxt('smd_at_c_zip')));
+    $order = array_values(array(gTxt('smd_adth_c_gzip'),gTxt('smd_adth_c_bzip2'),gTxt('smd_adth_c_zip')));
     $onoff = array_values(preg_split('//', $val, -1, PREG_SPLIT_NO_EMPTY));
     $out = array();
     foreach($order as $key1 => $value1) {
@@ -1870,7 +1865,7 @@ function smd_at_prefs_install($showpane = '1')
         }
     }
     if ($showpane) {
-        $message = gTxt('smd_at_prefs_installed');
+        $message = gTxt('smd_adth_prefs_installed');
         smd_at_setup($message);
     }
 }
@@ -1887,7 +1882,7 @@ function smd_at_prefs_remove($showpane = '1')
         }
     }
     if ($showpane) {
-        $message = gTxt('smd_at_prefs_deleted');
+        $message = gTxt('smd_adth_prefs_deleted');
         smd_at_setup($message);
     }
 }
@@ -2183,7 +2178,7 @@ function smd_at_switch($message = '')
 
     if ($skin && smd_at_exists($skin)) {
         set_pref('smd_skin', $skin, $event, PREF_HIDDEN, 'text_input', 0, PREF_PRIVATE);
-        $url .= '&message=' . (($message) ? $message : gTxt('smd_at_skin_switched', array('{skin}' => $skin)));
+        $url .= '&message=' . (($message) ? $message : gTxt('smd_adth_skin_switched', array('{skin}' => $skin)));
     } else {
         $url .= '&message=' . $message;
     }
@@ -2222,7 +2217,7 @@ function smd_at_chooser($message = '')
     $th = $at_prefs['smd_at_th'] + 80;
 
     $message = ($message) ? $message : gps('message');
-    pagetop(gTxt('smd_at_skinner'),$message);
+    pagetop(gTxt('smd_adth_skinner'),$message);
 
     $curr_skin = $theme->name;
 
@@ -2236,7 +2231,7 @@ function smd_at_chooser($message = '')
         }
     }
     $allowed = smd_at_sort($allowed);
-    $hdrow = hed(gTxt('smd_at_avail_title'), 2);
+    $hdrow = hed(gTxt('smd_adth_avail_title'), 2);
 
     echo '<div class="txp-container">';
 
@@ -2247,7 +2242,7 @@ function smd_at_chooser($message = '')
                 tda($hdrow, ' colspan="3"')
             ),
             assHead(
-                gTxt('smd_at_skin_gbl'),
+                gTxt('smd_adth_skin_gbl'),
                 'author',
                 'description'
             );
@@ -2260,8 +2255,8 @@ function smd_at_chooser($message = '')
             $thumbnail = smd_at_get_thumb($skinfo, 1);
             $switch_link = '?event='.$smd_at_adm_event.a.'step=smd_at_switch'.a.'nextstep=smd_admat'.a.'skin='.$skin_name;
             $thumblock = ($layout==0)
-                        ? '<a href="'.$switch_link.'" title="'.gTxt('smd_at_apply_skin').'">'.$skinfo['dname'].(($thumbnail) ? br.$thumbnail : '').'</a>'
-                        : '<a href="'.$switch_link.'" title="'.gTxt('smd_at_apply_skin').'">'.(($thumbnail) ? $thumbnail : gTxt('smd_at_apply_skin')).'</a>';
+                        ? '<a href="'.$switch_link.'" title="'.gTxt('smd_adth_apply_skin').'">'.$skinfo['dname'].(($thumbnail) ? br.$thumbnail : '').'</a>'
+                        : '<a href="'.$switch_link.'" title="'.gTxt('smd_adth_apply_skin').'">'.(($thumbnail) ? $thumbnail : gTxt('smd_adth_apply_skin')).'</a>';
             $authblock = (strpos($skinfo['author_uri'], "http://") === 0) ? '<a href="'.$skinfo['author_uri'].'">'.$skinfo['author'].'</a>' : $skinfo['author'];
 
             if ($layout==0) {
@@ -2275,7 +2270,7 @@ function smd_at_chooser($message = '')
                 echo n, '<div class="txp-grid-cell'.(($skin_name == $curr_skin) ? ' highlight' : '').'">',
                         n, hed($skinfo['dname'], 3),
                         n, '<p>', $thumblock, '</p>',
-                        n, '<p>', n, gTxt('smd_at_by'), n, $authblock.'</p>',
+                        n, '<p>', n, gTxt('smd_adth_by'), n, $authblock.'</p>',
                     n, '</div>';
             }
         }
