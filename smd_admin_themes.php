@@ -2577,25 +2577,6 @@ This plugin would not have existed without the dedication, ideas and genius of R
 
 Kudos and thanks to you all.
 
-h2(#changelog). Changelog
-
-* 12 Jun 2009 | 0.1 | Initial public beta
-* 03 Sep 2009 | 0.11 | Improved Textgarden theme feed and links ; improved file support (both thanks thebombsite) ; made global theme more obvious ; altered prefs panel a bit ; added @.ssc@ support ; ignored .svn subdirs (all thanks pieman) ; improved warning messages ; misc fixes and housekeeping
-* 02 Nov 2009 | 0.12 | Reduced theme feed clutter in the prefs table
-* 04 Nov 2009 | 0.13 | Removed ereg_replace to conform with PHP5.3+ (thanks thebombsite) ; changed 'global' to 'default' ; fixed rogue untranslated string
-* 09 Nov 2009 | 0.14 | Moved URLs in line with Textgarden layout alterations (thanks for the headsup thebombsite) ; made feeds more robust in the event Textgarden is down / under maintenance (thanks mlarino)
-* 09 Feb 2010 | 0.2 | Native support for zip importing and exporting (almost) irrespective of your PHP environment ; zip is now the default system ; better notification of supported compression types and more robust rejection if something is missing
-* 10 Feb 2010 | 0.21 | Fixed bzip2 warning (thanks thebombsite) ; fixed recursive mkdir problem with bzip2 files (thanks PHP manual comments) ; fixed rogue temp file left behind with zip import
-* 15 Feb 2010 | 0.22 | When renaming the core theme PHP file, automatically rename folder too (thanks floodfish)
-* 28 Feb 2010 | 0.23 | Rudimentary validation of zip file contents (thanks Tuts_and_Tipps); fixed export notification
-* 06 Aug 2010 | 0.24 | Fixed @fsockopen()@ and undefined index warnings if not connected to the Internet / prefs not installed
-* 01 Nov 2010 | 0.25 | Better theme integration (colours, etc) ; fixed duplicate page renders on edit screen and added filename format option (both thanks maverick)
-* 21 Feb 2011 | 0.26 | Fixed import bug if more than one dot in filename (thanks philwareham)
-* -08 Jun 2011 | 0.27 | Fixed erroneous stripping of slashes on save ; added txp path pref (thanks maniqui)- *VERSION REVOKED*
-* 28 Sep 2011 | 0.28 | Fixed erroneous stripping of slashes on save
-* 29 Jan 2012 | 0.30 | Moved (de)compression algorithms to smd_crunchers: now a required library for this plugin if you wish to import/export
-* 29 Jan 2012 | 0.31 | D'oh, moved @smd_mkdir_recursive()@ to smd_crunchers too
-* 11 Sep 2012 | 0.40 | Updated for Txp 4.5.0 (thanks philwareham) ; better folder support ; improved file and image handling ; supports sass, svg, and textile types ; preview facility added ; multi-file uploads supported ; placeholder image added for themes without screenshots (thanks philwareham)
 # --- END PLUGIN HELP ---
 -->
 <?php
