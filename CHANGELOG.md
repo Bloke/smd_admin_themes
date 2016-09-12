@@ -5,6 +5,7 @@
 * Updated for Txp 4.6.0 layout.
 * Improved buttons and other visual tweaks.
 * Shuffled things around for better workflow.
+* Changed all gTxt() prefixes to avoid clashes. Old strings need deleting manually :-(
 
 ## 0.40 - 2012-09-11
 
