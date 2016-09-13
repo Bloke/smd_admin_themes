@@ -1292,7 +1292,7 @@ function smd_at_delete()
     }
 
     extract(doSlash(gpsa(array('skin'))));
-    $message='';
+    $message = '';
 
     if (in_array($skin, $smd_core_themes)) {
         $message = array(gTxt('smd_adth_core_theme', array('{skin}' => $skin)), E_ERROR);
@@ -1338,9 +1338,11 @@ function smd_at_delete_file($skin, $delfile)
 
     $ret = false;
     $path = THEME.$skin.DS.$delfile;
+
     if (file_exists($path) && !in_array($skin, $smd_core_themes)) {
         $ret = unlink($path);
     }
+
     return $ret;
 }
 
@@ -1410,14 +1412,16 @@ function smd_at_save()
     $message = $extraMsg = '';
     $file = trim($file);
     $new_skin = trim($new_skin);
-    $new_skin_dir = trim(trim($new_skin_dir), DS);
+    $trimDir = trim($new_skin_dir);
+    $new_skin_dir = trim($trimDir, DS);
     $msglev = 0;
 
     // New file
     if (!$file && $new_skin) {
         $file = $new_skin;
         $dir = $new_skin_dir;
-        $ext = array_pop(explode ('.',$file));
+        $ext = pathinfo($file, PATHINFO_EXTENSION);
+
         if (strtolower($file) != 'readme' && ($ext == '' || !in_array($ext, $editable))) {
             $message = gTxt('smd_adth_unsupported_filetype').gTxt('smd_adth_unsupported_fudge');
             $msglev = E_WARNING;
@@ -1426,7 +1430,7 @@ function smd_at_save()
         }
     }
 
-    if ($message=='') {
+    if ($message == '') {
         $fname = sanitizeForFile($file);
         $new_skin = rawurlencode($new_skin);
         $_POST['new_skin'] = $new_skin;
@@ -1471,7 +1475,7 @@ function smd_at_save()
                 }
 
                 // Process any css replacements
-                $filebits = explode ('.',(($fname==$new_skin)? $fname : $new_skin));
+                $filebits = explode('.',(($fname==$new_skin)? $fname : $new_skin));
                 $cssfile = $filebits[0];
                 $ext = array_pop($filebits);
                 if ($ext == 'ssc') {
@@ -1510,12 +1514,13 @@ function smd_at_save()
                     }
 
                     // Generate and write the new css file
-                    $smd_at_edits = trim(strtr($smd_at_edits, $replacements));
+                    $repDone = strtr($smd_at_edits, $replacements);
+                    $smd_at_edits = trim($repDone);
                     $fh = fopen($filepath.$cssfile.'.css', 'wb');
                     fwrite($fh, $smd_at_edits);
                     fclose($fh);
                     if ($fname != $new_skin) {
-                        $oldfname = explode ('.', $fname);
+                        $oldfname = explode('.', $fname);
                         $oldfname = $oldfname[0].'.css';
                         $res = @unlink($filepath.$oldfname);
                     }
